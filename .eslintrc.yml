@@ -1,5 +1,7 @@
 env:
   browser: true
+  commonjs: true
+  node: true
   es6: true
 extends: 'eslint:recommended'
 parserOptions:
@@ -10,9 +12,6 @@ parserOptions:
 plugins:
   - react
 rules:
-  indent:
-    - error
-    - 2
   linebreak-style:
     - error
     - unix
@@ -22,3 +21,7 @@ rules:
   semi:
     - error
     - always
+  no-console:
+    - off
+  curly:
+    - warn
