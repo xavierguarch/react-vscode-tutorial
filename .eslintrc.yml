@@ -27,3 +27,4 @@ rules:
     - off
   curly:
     - warn
+  react/prop-types: 0
