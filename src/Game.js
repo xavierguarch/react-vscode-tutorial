@@ -3,12 +3,16 @@ import Stars from './Stars';
 import Answer from './Answer';
 import Numbers from './Numbers';
 import Button from './Button';
+import RedrawButton from './RedrawButton';
 
 class Game extends Component {
+  static getRandomNumber = () => 1 + Math.floor(Math.random() * 9);
+
   state = {
     selectedNumbers: [],
-    randomNumberOfStars: 1 + Math.floor(Math.random() * 9),
+    randomNumberOfStars: Game.getRandomNumber(),
     answerIsCorrect: null,
+    redrawsLeft: 5,
   }
 
   selectNumber = (clickedNumber) => {
@@ -32,11 +36,22 @@ class Game extends Component {
     }));
   }
 
+  applyRedraw = () => {
+    if (this.state.redrawsLeft === 0) { return; }
+    this.setState(prevState => ({
+      selectedNumbers: [],
+      randomNumberOfStars: Game.getRandomNumber(),
+      answerIsCorrect: null,
+      redrawsLeft: prevState.redrawsLeft - 1,
+    }));
+  }
+
   render() {
     const {
       selectedNumbers,
       randomNumberOfStars,
       answerIsCorrect,
+      redrawsLeft,
     } = this.state;
 
     return (
@@ -50,6 +65,8 @@ class Game extends Component {
             answerIsCorrect={answerIsCorrect} />
           <Answer selectedNumbers={selectedNumbers}
             unselectNumber={this.unselectNumber} />
+          <RedrawButton redrawsLeft={redrawsLeft}
+            handleOnClick={this.applyRedraw} />
         </div>
         <br />
         <Numbers selectedNumbers={selectedNumbers}
