@@ -10,13 +10,22 @@ const Numbers = (props) => {
       return 'selected';
     }
   };
+
+  const numberDisabled = (number) => {
+    if (props.usedNumbers.indexOf(number) >= 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
   return (
     <div className="card text-center">
       <div>
         {Numbers.list.map((number, i) =>
           <span key={i} className={numberClassName(number)}
             onClick={() => props.selectNumber(number)}
-            disabled={() => props.usedNumbers.indexOf(number) >= 0}>
+            disabled={numberDisabled(number)}>
             {number}
           </span>
         )}
