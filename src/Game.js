@@ -72,7 +72,7 @@ class Game extends Component {
       randomNumberOfStars: Game.getRandomNumber(),
       answerIsCorrect: null,
       redrawsLeft: prevState.redrawsLeft - 1,
-    }));
+    }), this.updateDoneStatus);
   }
 
   acceptAnswer = () => {
@@ -82,7 +82,7 @@ class Game extends Component {
       randomNumberOfStars: Game.getRandomNumber(),
       answerIsCorrect: null,
       acceptedNumbers: prevState.acceptedNumbers.concat(prevState.selectedNumbers),
-    }));
+    }), this.updateDoneStatus);
   }
 
   possibleSolutions = ({ randomNumberOfStars, acceptedNumbers }) => {
